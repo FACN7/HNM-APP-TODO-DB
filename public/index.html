@@ -17,22 +17,24 @@
 </div>  
 
 
-    <form class="loginForm" action="/user-login" method="post"> -->
+    <form class="loginForm" action="/user-login" method="post"> 
         <div class="loginContainer">
-            <br />
+            <br/>
             <h1 class="loginTitle">Login</h1>
+            <br/>
+            <br/>
+            <input class="userName"  placeholder=" username " name="userName" pattern="([a-zA-Z0-9]{1,})"
+            required title="the userName should not contanain sympols ( -,+,/,&,*,etc.. )"/> <br />
+            <br/>
+            <input class="password" type="password" placeholder=" password" name="password" pattern="([a-zA-Z0-9]{5,})"
+            required title="unavailable password"   />
+          
             <br />
             <br />
-            <input class="userName" type="text" placeholder=" username " name="userName" /> <br />
             <br />
-            <input class="password" type="password" placeholder=" password" name="password" />
-
+            <br />
         <button class="loginButton" type="submit"> Log in</button>
 
-            <br />
-            <br />
-            <br />
-            <br />
 
 
         </div>

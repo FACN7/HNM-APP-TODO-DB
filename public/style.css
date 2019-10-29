@@ -14,7 +14,7 @@ body{
 
 
 .loginContainer {
-    background: wheat;
+    background:whitesmoke;
     width: 400px;
     height: 400px;
     position: fixed;
@@ -28,6 +28,7 @@ border-radius: 1%;
 border: 1px black solid;
 padding: 10px;
 /* box-shadow: 5px 5px 8px blue, 10px 10px 8px red; */
+opacity: 0.96;
 
 }
 
@@ -71,8 +72,8 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
 .signUpButton{
-  color: white;
-  background: black;
+  color: black;
+  background: white;
   cursor: pointer;
 border-radius: 5%;
   border: none;
