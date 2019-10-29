@@ -1,0 +1,63 @@
+body{
+    /* background-image: url("https://blog.hubspot.com/hubfs/ultimate-guide-creating-sales-plan.jpg"); */
+   /* background-image: url("https://dmi-uploads.imgix.net/general/What-Skills-do-I-need-to-be-a-Digital-Project-Manager.jpg?fm=jpg&ixlib=php-1.1.0&q=60&w=2060&s=02aa93bfa7dc92f4c7dd356039f39a4e"); */
+   /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmKCfWI_WATd9XwGJ4wRneq2h9I7Qk7f7Rh0knZ7A0xDvABMqp&s'); */
+  /* background-image:url('https://blog.projectplace.com/wp-content/uploads/2017/10/7-Tips-to-Improve-Project-Productivity-and-Team-Work_1024x768.jpg') ; */
+   background-repeat: no-repeat;
+    
+   background: url('https://blog.projectplace.com/wp-content/uploads/2017/10/7-Tips-to-Improve-Project-Productivity-and-Team-Work_1024x768.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.loginContainer {
+    background: wheat;
+    width: 400px;
+    height: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+text-align: center;
+border-radius: 1%;
+
+border: 1px black solid;
+padding: 10px;
+/* box-shadow: 5px 5px 8px blue, 10px 10px 8px red; */
+
+}
+
+.loginTitle{
+    font-size: 3rem;
+    text-align: center;
+    
+}
+
+.userName{
+    width: 200px;
+    height: 25px;
+border: 1px black solid;
+
+}
+
+.password{
+    width: 200px;
+    height: 25px;
+border: 1px black solid;
+
+}
+
+.login{
+    font-family: inherit;
+    font-size: 1.2rem;
+    color: white;
+    background:black;
+        height: 40px;
+        width: 95px;
+border-radius: 10%;
+
+}
