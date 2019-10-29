@@ -1,9 +1,10 @@
 const dbConnection = require("../database/db_connection");
 
-//Check if user exist according username and password
-const check_user = (user, password, cb) => {
+//Insert new task
+const add_user = (user_name, password, cb) => {
     dbConnection.query(
-        `select * from users where user_name like '${user}' and password like '${password}'`,
+        "INSERT INTO users (user_name,password)VALUES($1,$2)",
+        [user_name, password],
         (err, res) => {
             if (err) return cb(err);
             console.log("res.rows=:", res.rows);
@@ -12,4 +13,4 @@ const check_user = (user, password, cb) => {
     );
 }
 
-module.exports = check_user;
+module.exports = add_user;

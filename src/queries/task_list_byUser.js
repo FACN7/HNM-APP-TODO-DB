@@ -1,9 +1,9 @@
 const dbConnection = require("../database/db_connection");
 
-//Check if user exist according username and password
-const check_user = (user, password, cb) => {
+//show the list of tasks of specific user
+const task_list_byUser = (cb) => {
     dbConnection.query(
-        `select * from users where user_name like '${user}' and password like '${password}'`,
+        `select content from tasks where user_id=${user_id}`,
         (err, res) => {
             if (err) return cb(err);
             console.log("res.rows=:", res.rows);
@@ -12,4 +12,4 @@ const check_user = (user, password, cb) => {
     );
 }
 
-module.exports = check_user;
+module.exports = task_list_byUser;
