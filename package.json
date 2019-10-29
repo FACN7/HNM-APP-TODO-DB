@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/FACN7/HNM-APP-TODO-DB#readme",
   "dependencies": {
+    "cookie": "^0.4.0",
     "env2": "^2.2.2",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^1.19.4",
     "pg": "^7.12.1",
     "url": "^0.11.0"
