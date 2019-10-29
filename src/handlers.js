@@ -20,6 +20,29 @@ const homeHandler = response => {
     });
 };
 
+const publicHandler = (url, response) => {
+    const filepath = path.join(__dirname, "..", url);
+    readFile(filepath, (err, file) => {
+        if (err) return serverError(err, response);
+        const [, extension] = url.split(".");
+        const extensionType = {
+            html: "text/html",
+            css: "text/css",
+            js: "application/javascript",
+            ico: "image/x-icon"
+        };
+        response.writeHead(200, { "content-type": extensionType[extension] });
+        response.end(file);
+    });
+};
+
+const errorHandler = response => {
+    response.writeHead(404, { "content-type": "text/html" });
+    response.end("<h1>404 Page Requested Cannot be Found</h1>");
+};
+
 module.exports = {
-    homeHandler
+    homeHandler,
+    publicHandler,
+    errorHandler
 }
