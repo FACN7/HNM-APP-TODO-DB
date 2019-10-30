@@ -1,11 +1,14 @@
+let userID;
+
 fetch("/check-user")
   .then(res => res.json())
   .then(info => {
     console.log(info);
     const username = info.user_name;
+    userID = info.user_id;
     var hellodiv = document.getElementById("hello");
     var hellomsg = document.createElement("div");
-    hellomsg.innerHTML = `Hello, ${username}!`;
+    hellomsg.innerHTML = `Hello, ${username}! Your ID is ${userID}`;
     hellodiv.appendChild(hellomsg);
     var logoutForm = document.createElement("form");
     logoutForm.className = "logout-form";

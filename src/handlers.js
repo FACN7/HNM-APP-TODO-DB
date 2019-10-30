@@ -62,7 +62,10 @@ const userLogin = (request, response) => {
       } else {
         if (res.length > 0) {
           console.log(res);
-          const cookie = sign({ user_name: username }, SECRET);
+          const cookie = sign(
+            { user_name: username, user_id: res[0].user_id },
+            SECRET
+          );
           if (!username || !password) {
             response.writeHead(401, { "content-type": "text/html" });
             response.end("<h1>Username or password is missing</h1>");
