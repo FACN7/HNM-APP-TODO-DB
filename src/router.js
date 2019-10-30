@@ -5,7 +5,9 @@ const {
   userLogin,
   checkUser,
   displayTasks,
-  logOut
+  logOut,
+  addTask,
+  takeTask
 } = require("./handlers");
 
 const router = (request, response) => {
@@ -20,6 +22,10 @@ const router = (request, response) => {
     checkUser(request, response);
   } else if (url === "/log-out") {
     logOut(response);
+  } else if (url === "/add-task") {
+    addTask(request, response);
+  } else if (url === "/take-task") {
+    takeTask(request, response);
   } else if (url.includes("public")) {
     publicHandler(url, response);
   } else {

@@ -1,9 +1,10 @@
 const dbConnection = require("../database/db_connection");
 
-//Show the available tasks which anybody work on them
-const available_tasks = cb => {
+//Insert new task
+const check_user = (content, user_id, cb) => {
   dbConnection.query(
-    `select * from tasks where task_done = false and task_taken=false`,
+    "INSERT INTO tasks (content,user_id)VALUES($1,$2)",
+    [content, user_id],
     (err, res) => {
       if (err) return cb(err);
       console.log("res.rows=:", res.rows);
@@ -12,4 +13,4 @@ const available_tasks = cb => {
   );
 };
 
-module.exports = available_tasks;
+module.exports = check_user;

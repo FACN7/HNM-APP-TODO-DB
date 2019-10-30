@@ -7,6 +7,8 @@ const queryString = require("querystring");
 const { parse } = require("cookie");
 const { sign, verify } = require("jsonwebtoken");
 const userCreds = require("./queries/check_user");
+const insertTask = require("./queries/insert_new_task");
+const takenTask = require("./queries/update_task_to_taken");
 
 const SECRET = "kjshfcwahbfcjawbsf";
 
@@ -106,6 +108,62 @@ const checkUser = (request, response) => {
   }
 };
 
+const addTask = (request, response) => {
+  let data = "";
+  request.on("data", function(chunk) {
+    data += chunk;
+  });
+  request.on("end", () => {
+    const content = queryString.parse(data).content;
+    const userId = queryString.parse(data).user_id;
+    insertTask(content, user_id, (err, res) => {
+      if (err) {
+        response.writeHead(500, "Content-Type: text/html");
+        response.end("<h1>Sorry, there was a problem adding that task</h1>");
+        console.log(err);
+      } else {
+        response.writeHead(200, { "Content-Type": "text/html" });
+        fs.readFile(__dirname + "/../public/tasks.html", function(error, file) {
+          if (error) {
+            throw new Error("We have an error:", err);
+            return;
+          } else {
+            response.end(file);
+          }
+        });
+      }
+    });
+  });
+};
+
+const takeTask = (request, response) => {
+  let data = "";
+  request.on("data", function(chunk) {
+    data += chunk;
+  });
+  request.on("end", () => {
+    const content = queryString.parse(data).content;
+    const userId = queryString.parse(data).user_id;
+    takenTask(content, user_id, (err, res) => {
+      if (err) {
+        response.writeHead(500, "Content-Type: text/html");
+        response.end("<h1>Sorry, there was a problem taking this task</h1>");
+        console.log(err);
+      } else {
+        response.writeHead(200, { "Content-Type": "text/html" });
+        fs.readFile(__dirname + "/../public/tasks.html", function(error, file) {
+          if (error) {
+            throw new Error("We have an error:", err);
+            return;
+          } else {
+            response.end(file);
+          }
+        });
+      }
+    });
+  });
+};
+
 const publicHandler = (url, response) => {
   const filepath = path.join(__dirname, "..", url);
   readFile(filepath, (err, file) => {
@@ -134,5 +192,7 @@ module.exports = {
   userLogin,
   checkUser,
   displayTasks,
-  logOut
+  logOut,
+  addTask,
+  takeTask
 };
