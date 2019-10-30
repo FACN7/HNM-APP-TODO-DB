@@ -171,7 +171,14 @@ const tasksToDo = response => {
   });
 };
 
-const getUserTasks = response => {};
+const getUserTasks = response => {
+  userTasks((err, res) => {
+    if (err) return console.log(err);
+    let dynmicData = JSON.stringify(res);
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(dynmicData);
+  });
+};
 
 const publicHandler = (url, response) => {
   const filepath = path.join(__dirname, "..", url);

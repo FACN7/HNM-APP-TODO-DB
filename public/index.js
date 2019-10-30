@@ -1,4 +1,3 @@
-
 let userID;
 
 fetch("/check-user")
@@ -8,7 +7,6 @@ fetch("/check-user")
     let username = info.user_name;
     console.log(info.user_id);
     userID = info.user_id;
-
 
     var hellodiv = document.getElementById("hello");
     var hellomsg = document.createElement("div");
@@ -32,7 +30,7 @@ fetch("/tasks-for-all")
   .then(info => {
     var todos = document.getElementById("tasksToDo");
     console.log(info);
-    info.forEach(function (todo) {
+    info.forEach(function(todo) {
       var li = document.createElement("li");
       var rowForm = document.createElement("form");
       rowForm.className = "row-form";
@@ -42,6 +40,46 @@ fetch("/tasks-for-all")
       rowForm.className = "task-to-do";
       var author = document.createElement("span");
       author.innerText = ` By ${todo.user_name} `;
+      author.className = "task-by";
+      var inputID = document.createElement("input");
+      inputID.type = "text";
+      inputID.name = "user_id";
+      inputID.value = `${userID}`;
+      inputID.style = "display:none";
+      var description = document.createElement("input");
+      description.type = "text";
+      description.name = "content";
+      description.value = `${todo.content}`;
+      description.style = "display:none";
+      var takeButton = document.createElement("button");
+      takeButton.innerHTML = ">>";
+      takeButton.type = "submit";
+      takeButton.name = "take-todo";
+      rowForm.appendChild(author);
+      rowForm.appendChild(takeButton);
+      rowForm.appendChild(inputID);
+      rowForm.appendChild(description);
+      li.appendChild(rowForm);
+      todos.appendChild(li);
+    });
+  });
+
+fetch("/user-tasks")
+  .then(res => res.json())
+  .then(info => {
+    var todos = document.getElementById("userTasksNotDone");
+    var usertasks = info.filter(x => (x.user_id = userID));
+    console.log(info);
+    usertasks.forEach(function(todo) {
+      var li = document.createElement("li");
+      var rowForm = document.createElement("form");
+      rowForm.className = "row-form";
+      rowForm.method = "post";
+      rowForm.action = "/take-task";
+      rowForm.innerText = todo.content;
+      rowForm.className = "task-to-do";
+      var author = document.createElement("span");
+      author.innerText = `By ...`;
       author.className = "task-by";
       var inputID = document.createElement("input");
       inputID.type = "text";
