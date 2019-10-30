@@ -1,9 +1,9 @@
 const dbConnection = require("../database/db_connection");
 
-//when the admin wants to delete task 
-const delete_task_by_admin = (content, cb) => {
+//show all the tasks content in the admin page 
+const show_all_task_forAdmin = (cb) => {
     dbConnection.query(
-        `delete from tasks where content like '${content}' `,
+        `select content from tasks `,
         (err, res) => {
             if (err) return cb(err);
             console.log("res.rows=:", res.rows);
@@ -12,4 +12,4 @@ const delete_task_by_admin = (content, cb) => {
     );
 }
 
-module.exports = delete_task_by_admin;
+module.exports = show_all_task_forAdmin;
