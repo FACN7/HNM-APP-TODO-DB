@@ -1,11 +1,21 @@
-let userID;
 
 fetch("/check-user")
   .then(res => res.json())
   .then(info => {
     console.log(info);
     const username = info.user_name;
-    userID = info.user_id;
+    console.log(info.user_id);
+    let userID = info.user_id;
+
+    fetch('/id', {
+      method: 'POST',
+      body: userID
+    }).catch(error => {
+      console.log(error);
+    });
+
+
+
     var hellodiv = document.getElementById("hello");
     var hellomsg = document.createElement("div");
     hellomsg.innerHTML = `Hello, ${username}! Your ID is ${userID}`;
@@ -22,3 +32,6 @@ fetch("/check-user")
     logoutForm.appendChild(logoutButton);
     hellodiv.appendChild(logoutForm);
   });
+
+
+
