@@ -1,5 +1,6 @@
 const dbConnection = require("../database/db_connection");
 
+//Check if user exist according username and password
 const check_user = (user, password, cb) => {
   dbConnection.query(
     `select * from users where user_name like '${user}' and password like '${password}'`,

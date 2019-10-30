@@ -14,7 +14,6 @@
     </div>
 
     <form class="loginForm" action="/user-login" method="post">
-      -->
       <div class="loginContainer">
         <br />
         <h1 class="loginTitle">Login</h1>
@@ -22,9 +21,11 @@
         <br />
         <input
           class="userName"
-          type="text"
           placeholder=" username "
           name="userName"
+          pattern="([a-zA-Z0-9]{1,})"
+          required
+          title="the userName should not contanain sympols (-,+,/,&,*,etc.. )"
         />
         <br />
         <br />
@@ -33,14 +34,16 @@
           type="password"
           placeholder=" password"
           name="password"
+          pattern="([a-zA-Z0-9]{5,})"
+          required
+          title="unavailable password"
         />
 
+        <br />
+        <br />
+        <br />
+        <br />
         <button class="loginButton" type="submit">Log in</button>
-
-        <br />
-        <br />
-        <br />
-        <br />
       </div>
     </form>
     <script type="text/javascript" src="public/index.js"></script>
