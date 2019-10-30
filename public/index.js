@@ -1,17 +1,14 @@
+
+let userID;
+
 fetch("/check-user")
   .then(res => res.json())
   .then(info => {
     console.log(info);
-    const username = info.user_name;
+    let username = info.user_name;
     console.log(info.user_id);
-    let userID = info.user_id;
+    userID = info.user_id;
 
-    fetch("/id", {
-      method: "POST",
-      body: userID
-    }).catch(error => {
-      console.log(error);
-    });
 
     var hellodiv = document.getElementById("hello");
     var hellomsg = document.createElement("div");
@@ -35,7 +32,7 @@ fetch("/tasks-for-all")
   .then(info => {
     var todos = document.getElementById("tasksToDo");
     console.log(info);
-    info.forEach(function(todo) {
+    info.forEach(function (todo) {
       var li = document.createElement("li");
       var rowForm = document.createElement("form");
       rowForm.className = "row-form";
@@ -44,7 +41,7 @@ fetch("/tasks-for-all")
       rowForm.innerText = todo.content;
       rowForm.className = "task-to-do";
       var author = document.createElement("span");
-      author.innerText = `By ...`;
+      author.innerText = ` By ${todo.user_name} `;
       author.className = "task-by";
       var inputID = document.createElement("input");
       inputID.type = "text";

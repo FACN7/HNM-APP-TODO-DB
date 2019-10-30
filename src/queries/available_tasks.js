@@ -4,7 +4,7 @@ const dbConnection = require("../database/db_connection");
 
 const available_tasks = cb => {
   dbConnection.query(
-    `select * from tasks where task_done = false and task_taken=false`,
+    `select t.*,u.user_name from tasks t join users u on u.user_id = t.user_id where t.task_done = false and t.task_taken=false`,
     (err, res) => {
       if (err) return cb(err);
       console.log("res.rows=:", res.rows);
