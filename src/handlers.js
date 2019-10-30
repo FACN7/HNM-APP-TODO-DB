@@ -10,6 +10,7 @@ const userCreds = require("./queries/check_user");
 const insertTask = require("./queries/insert_new_task");
 const takenTask = require("./queries/update_task_to_taken");
 const availableTasks = require("./queries/available_tasks");
+const userTasks = require("./queries/task_list_byUser");
 
 const SECRET = "kjshfcwahbfcjawbsf";
 
