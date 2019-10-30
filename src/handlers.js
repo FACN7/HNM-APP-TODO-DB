@@ -9,6 +9,7 @@ const { sign, verify } = require("jsonwebtoken");
 const userCreds = require("./queries/check_user");
 const insertTask = require("./queries/insert_new_task");
 const takenTask = require("./queries/update_task_to_taken");
+const availableTasks = require("./queries/available_tasks");
 
 const SECRET = "kjshfcwahbfcjawbsf";
 
@@ -147,25 +148,29 @@ const takeTask = (request, response) => {
   request.on("end", () => {
     const content = queryString.parse(data).content;
     const userId = queryString.parse(data).user_id;
-    takenTask(content, user_id, (err, res) => {
+    takenTask(content, userId, (err, res) => {
       if (err) {
         response.writeHead(500, "Content-Type: text/html");
         response.end("<h1>Sorry, there was a problem taking this task</h1>");
         console.log(err);
       } else {
-        response.writeHead(200, { "Content-Type": "text/html" });
-        fs.readFile(__dirname + "/../public/tasks.html", function(error, file) {
-          if (error) {
-            throw new Error("We have an error:", err);
-            return;
-          } else {
-            response.end(file);
-          }
-        });
+        response.writeHead(302, { Location: "/tasks" });
+        response.end();
       }
     });
   });
 };
+
+const tasksToDo = response => {
+  availableTasks((err, res) => {
+    if (err) return console.log(err);
+    let dynmicData = JSON.stringify(res);
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(dynmicData);
+  });
+};
+
+const getUserTasks = response => {};
 
 const publicHandler = (url, response) => {
   const filepath = path.join(__dirname, "..", url);
@@ -197,5 +202,7 @@ module.exports = {
   displayTasks,
   logOut,
   addTask,
-  takeTask
+  takeTask,
+  tasksToDo,
+  getUserTasks
 };
