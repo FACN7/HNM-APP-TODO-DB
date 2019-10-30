@@ -1,7 +1,7 @@
 const dbConnection = require("../database/db_connection");
 
-//Insert new task
-const check_user = (content, user_id, cb) => {
+//Insert new task to task container
+const insert_new_task = (content, user_id, cb) => {
     dbConnection.query(
         "INSERT INTO tasks (content,user_id)VALUES($1,$2)",
         [content, user_id],
@@ -13,4 +13,4 @@ const check_user = (content, user_id, cb) => {
     );
 }
 
-module.exports = check_user;
+module.exports = insert_new_task;

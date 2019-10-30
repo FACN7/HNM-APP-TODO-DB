@@ -1,10 +1,9 @@
 const dbConnection = require("../database/db_connection");
 
-//Insert new user to database
-const add_user = (user_name, password, cb) => {
+//Show the available tasks which anybody work on them
+const available_tasks = (user, password, cb) => {
     dbConnection.query(
-        "INSERT INTO users (user_name,password)VALUES($1,$2)",
-        [user_name, password],
+        `select * from tasks where task_done = false and task_taken=false`,
         (err, res) => {
             if (err) return cb(err);
             console.log("res.rows=:", res.rows);
@@ -13,4 +12,4 @@ const add_user = (user_name, password, cb) => {
     );
 }
 
-module.exports = add_user;
+module.exports = available_tasks;
