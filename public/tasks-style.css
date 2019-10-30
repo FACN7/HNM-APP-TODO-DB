@@ -1,48 +1,44 @@
-.tasksToDo{
-    overflow: auto;
-    height: 500px;
+#tasksToDo {
+  overflow: auto;
+  height: 500px;
 }
 
-    .tasksToDo li  {
-        background: red;
-        margin-bottom: 30px;
-        font-size: 2rem;
-        width:800pt;  
-        overflow: auto;  
+#tasksToDo li {
+  background: red;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  width: 800pt;
+  overflow: auto;
+}
 
-    }
+/* this will be applyed to every button in the page  */
+button {
+  margin-left: 3rem;
+  /* margin:3rem; */
+}
 
-    /* this will be applyed to every button in the page  */
-  button{
-      margin-left: 3rem;
-      /* margin:3rem; */
-  }
+.userTasks li {
+  background: orange;
+  font-size: 3rem;
+  margin-bottom: 30px;
+  width: 800px;
+}
+.userTasks h1 {
+  margin-left: 290px;
+}
 
-  .userTasks li {
-    background:orange;
-    font-size: 3rem;
-    margin-bottom: 30px;
-    width: 800px;
+.fnishedTasks li {
+  font-size: 3rem;
+  width: 800px;
+  background: greenyellow;
+  margin-bottom: 30px;
+}
 
-  }
-  .userTasks h1{
-      margin-left: 290px;
-  }
-  
-  .fnishedTasks li{
-      font-size: 3rem;
-      width: 800px;
-      background: greenyellow;
-      margin-bottom:30px;
-  }
+.fnishedTasks h1 {
+  margin-left: 290px;
+  /* text-align: center; */
+}
 
-
-  .fnishedTasks h1{
-      margin-left: 290px;
-      /* text-align: center; */
-  }
-
-
-  .tasksToDoContainer h1{
-      margin-left: 470px;
-  }
+.tasksToDoContainer h1 {
+  margin-left: 470px;
+}
