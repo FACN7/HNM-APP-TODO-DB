@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <link rel="stylesheet" href="public/style.css" />
-</head>
+  </head>
 
-<body>
-    
-
+  <body>
     <div class="signUpBtnContainer">
-<button href="/" class="signUpButton"> Sign up</button>  
-</div>  
+      <button href="/" class="signUpButton">Sign up</button>
+    </div>
 
+    <form class="loginForm" action="/user-login" method="post">
+      -->
+      <div class="loginContainer">
+        <br />
+        <h1 class="loginTitle">Login</h1>
+        <br />
+        <br />
+        <input
+          class="userName"
+          type="text"
+          placeholder=" username "
+          name="userName"
+        />
+        <br />
+        <br />
+        <input
+          class="password"
+          type="password"
+          placeholder=" password"
+          name="password"
+        />
 
-    <form class="loginForm" action="/user-login" method="post"> -->
-        <div class="loginContainer">
-            <br />
-            <h1 class="loginTitle">Login</h1>
-            <br />
-            <br />
-            <input class="userName" type="text" placeholder=" username " name="userName" /> <br />
-            <br />
-            <input class="password" type="password" placeholder=" password" name="password" />
+        <button class="loginButton" type="submit">Log in</button>
 
-        <button class="loginButton" type="submit"> Log in</button>
-
-            <br />
-            <br />
-            <br />
-            <br />
-
-
-        </div>
-    </form> 
-</body>
-
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+    </form>
+    <script type="text/javascript" src="public/index.js"></script>
+  </body>
 </html>

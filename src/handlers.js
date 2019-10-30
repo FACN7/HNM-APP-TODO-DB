@@ -6,6 +6,7 @@ const path = require("path");
 const queryString = require("querystring");
 const { parse } = require("cookie");
 const { sign, verify } = require("jsonwebtoken");
+const userCreds = require("./queries/check_user");
 
 const SECRET = "kjshfcwahbfcjawbsf";
 
@@ -24,6 +25,23 @@ const homeHandler = response => {
   });
 };
 
+const logOut = res => {
+  res.writeHead(302, {
+    Location: "/",
+    "Set-Cookie": "jwt=0; Max-Age=0"
+  });
+  return res.end();
+};
+
+const displayTasks = response => {
+  const filepath = path.join(__dirname, "..", "public", "tasks.html");
+  readFile(filepath, (err, file) => {
+    if (err) return serverError(err, response);
+    response.writeHead(200, { "Content-Type": "text/html" });
+    response.end(file);
+  });
+};
+
 const userLogin = (request, response) => {
   let data = "";
   request.on("data", function(chunk) {
@@ -31,19 +49,61 @@ const userLogin = (request, response) => {
   });
   request.on("end", () => {
     const username = queryString.parse(data).userName;
+    console.log(username);
     const password = queryString.parse(data).password;
-    const cookie = sign({ user_name: username }, SECRET);
-    if (!username || !password) {
-      response.writeHead(404, { "content-type": "text/html" });
-      response.end("<h1>Username or password is missing</h1>");
-    } else {
-      response.writeHead(302, {
-        Location: "/tasks",
-        "Set-Cookie": `jwt=${cookie}; HttpOnly`
-      });
-      return response.end(username);
-    }
+
+    userCreds(username, password, (err, res) => {
+      if (err) {
+        response.writeHead(500, "Content-Type: text/html");
+        response.end("<h1>Sorry, there was a problem finding this user</h1>");
+        console.log(err);
+      } else {
+        if (res.length > 0) {
+          console.log(res);
+          const cookie = sign({ user_name: username }, SECRET);
+          if (!username || !password) {
+            response.writeHead(401, { "content-type": "text/html" });
+            response.end("<h1>Username or password is missing</h1>");
+          } else {
+            response.writeHead(302, {
+              Location: "/tasks",
+              "Set-Cookie": `jwt=${cookie}; HttpOnly`
+            });
+            return response.end(username);
+          }
+        } else {
+          response.writeHead(401, { "content-type": "text/html" });
+          response.end("<h1>Could not find this user</h1>");
+        }
+      }
+    });
   });
+};
+
+const checkUser = (request, response) => {
+  if (request.headers.cookie) {
+    console.log("Eta heders cuki:", request.headers.cookie);
+    const { jwt } = parse(request.headers.cookie);
+    console.log("Eta should be value befor we do anything:", jwt);
+    if (jwt) {
+      return verify(jwt, SECRET, (err, jwt) => {
+        if (err) {
+          response.writeHead(404, { "content-type": "text/html" });
+          response.end("<h1>Username not found</h1>");
+        } else {
+          console.log("Eta should be value:", typeof jwt);
+          var whosTheUser = JSON.stringify(jwt);
+          response.writeHead(200, {
+            "Content-Type": "application/json"
+          });
+          response.end(whosTheUser);
+        }
+      });
+    } else {
+      response.writeHead(404, { "content-type": "text/html" });
+      response.end("<h1>Poshel nakui</h1>");
+    }
+  }
 };
 
 const publicHandler = (url, response) => {
@@ -71,5 +131,8 @@ module.exports = {
   homeHandler,
   publicHandler,
   errorHandler,
-  userLogin
+  userLogin,
+  checkUser,
+  displayTasks,
+  logOut
 };
