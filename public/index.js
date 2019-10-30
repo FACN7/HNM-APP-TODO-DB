@@ -1,16 +1,16 @@
+// We store the ID of logged in user to use it after
 let userID;
+
+// Authentication fetch, say hello to the user and adds log out button.
 
 fetch("/check-user")
   .then(res => res.json())
   .then(info => {
-    console.log(info);
     let username = info.user_name;
-    console.log(info.user_id);
     userID = info.user_id;
-
     var hellodiv = document.getElementById("hello");
     var hellomsg = document.createElement("div");
-    hellomsg.innerHTML = `Hello, ${username}! Your ID is ${userID}`;
+    hellomsg.innerHTML = `Hello, ${username}!`;
     hellodiv.appendChild(hellomsg);
     var logoutForm = document.createElement("form");
     logoutForm.className = "logout-form";
@@ -25,11 +25,36 @@ fetch("/check-user")
     hellodiv.appendChild(logoutForm);
   });
 
+// Fetch to show the tasks which are available for all the users.
+// Creates a field to add a new task;
+// creates a button for each task so the user can take a task for himself/herself
+
 fetch("/tasks-for-all")
   .then(res => res.json())
   .then(info => {
+    var taskcont = document.getElementById("add-task-container");
+    var newTask = document.createElement("form");
+    newTask.className = "new-task-form";
+    newTask.method = "post";
+    newTask.action = "/add-task";
+    var newTaskField = document.createElement("input");
+    newTaskField.type = "text";
+    newTaskField.name = "task";
+    newTaskField.placeholder = "Add your task here";
+    var uID = document.createElement("input");
+    uID.type = "text";
+    uID.name = "author_id";
+    uID.value = `${userID}`;
+    uID.style = "display:none";
+    var submitTask = document.createElement("button");
+    submitTask.innerHTML = "Submit";
+    submitTask.type = "submit";
+    submitTask.name = "submit-todo";
+    newTask.appendChild(newTaskField);
+    newTask.appendChild(uID);
+    newTask.appendChild(submitTask);
+    taskcont.appendChild(newTask);
     var todos = document.getElementById("tasksToDo");
-    console.log(info);
     info.forEach(function(todo) {
       var li = document.createElement("li");
       var rowForm = document.createElement("form");
@@ -64,12 +89,13 @@ fetch("/tasks-for-all")
     });
   });
 
+// Fetch to display the tasks of the current user
+
 fetch("/user-tasks")
   .then(res => res.json())
   .then(info => {
     var todos = document.getElementById("userTasksNotDone");
     var usertasks = info.filter(x => (x.user_id = userID));
-    console.log(info);
     usertasks.forEach(function(todo) {
       var li = document.createElement("li");
       var rowForm = document.createElement("form");
@@ -78,9 +104,6 @@ fetch("/user-tasks")
       rowForm.action = "/take-task";
       rowForm.innerText = todo.content;
       rowForm.className = "task-to-do";
-      var author = document.createElement("span");
-      author.innerText = `By ...`;
-      author.className = "task-by";
       var inputID = document.createElement("input");
       inputID.type = "text";
       inputID.name = "user_id";
@@ -95,7 +118,6 @@ fetch("/user-tasks")
       takeButton.innerHTML = ">>";
       takeButton.type = "submit";
       takeButton.name = "take-todo";
-      rowForm.appendChild(author);
       rowForm.appendChild(takeButton);
       rowForm.appendChild(inputID);
       rowForm.appendChild(description);

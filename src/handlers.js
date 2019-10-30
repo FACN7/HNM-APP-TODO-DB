@@ -53,9 +53,7 @@ const userLogin = (request, response) => {
   });
   request.on("end", () => {
     const username = queryString.parse(data).userName;
-    console.log(username);
     const password = queryString.parse(data).password;
-
     userCreds(username, password, (err, res) => {
       if (err) {
         response.writeHead(500, "Content-Type: text/html");
@@ -63,7 +61,6 @@ const userLogin = (request, response) => {
         console.log(err);
       } else {
         if (res.length > 0) {
-          console.log(res);
           const cookie = sign(
             { user_name: username, user_id: res[0].user_id },
             SECRET
@@ -89,9 +86,7 @@ const userLogin = (request, response) => {
 
 const checkUser = (request, response) => {
   if (request.headers.cookie) {
-    console.log("Eta heders cuki:", request.headers.cookie);
     const { jwt } = parse(request.headers.cookie);
-    console.log("Eta should be value befor we do anything:", jwt);
     if (jwt) {
       return verify(jwt, SECRET, (err, jwt) => {
         if (err) {
@@ -119,23 +114,16 @@ const addTask = (request, response) => {
     data += chunk;
   });
   request.on("end", () => {
-    const content = queryString.parse(data).content;
-    const userId = queryString.parse(data).user_id;
-    insertTask(content, user_id, (err, res) => {
+    const content = queryString.parse(data).task;
+    const userId = queryString.parse(data).author_id;
+    insertTask(content, userId, (err, res) => {
       if (err) {
         response.writeHead(500, "Content-Type: text/html");
         response.end("<h1>Sorry, there was a problem adding that task</h1>");
         console.log(err);
       } else {
-        response.writeHead(200, { "Content-Type": "text/html" });
-        fs.readFile(__dirname + "/../public/tasks.html", function(error, file) {
-          if (error) {
-            throw new Error("We have an error:", err);
-            return;
-          } else {
-            response.end(file);
-          }
-        });
+        response.writeHead(302, { Location: "/tasks" });
+        response.end();
       }
     });
   });
@@ -175,6 +163,7 @@ const getUserTasks = response => {
   userTasks((err, res) => {
     if (err) return console.log(err);
     let dynmicData = JSON.stringify(res);
+    console.log(dynmicData);
     response.writeHead(200, { "Content-Type": "application/json" });
     response.end(dynmicData);
   });
