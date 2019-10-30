@@ -28,6 +28,17 @@ const router = (request, response) => {
     takeTask(request, response);
   } else if (url.includes("public")) {
     publicHandler(url, response);
+  } else if (url === '/id') {
+
+    let data = "";
+    request.on('data', chunk => {
+      data += chunk;
+    });
+    request.on('end', () => {
+
+      //console.log('try: ', JSON.parse(data));
+      response.end(JSON.parse(data));
+    })
   } else {
     errorHandler(response);
   }
