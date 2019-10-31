@@ -11,6 +11,8 @@ const insertTask = require("./queries/insert_new_task");
 const takenTask = require("./queries/update_task_to_taken");
 const availableTasks = require("./queries/available_tasks");
 const userTasks = require("./queries/task_list_byUser");
+const done = require("./queries/task_list_byUser_done");
+const complete = require("./queries/update_task_to_done");
 
 const SECRET = "kjshfcwahbfcjawbsf";
 
@@ -152,6 +154,27 @@ const takeTask = (request, response) => {
   });
 };
 
+const markCompleted = (request, response) => {
+  let data = "";
+  request.on("data", function(chunk) {
+    data += chunk;
+  });
+  request.on("end", () => {
+    const content = queryString.parse(data).content;
+    const userId = queryString.parse(data).user_id;
+    complete(content, userId, (err, res) => {
+      if (err) {
+        response.writeHead(500, "Content-Type: text/html");
+        response.end("<h1>Sorry, there was a problem taking this task</h1>");
+        console.log(err);
+      } else {
+        response.writeHead(302, { Location: "/tasks" });
+        response.end();
+      }
+    });
+  });
+};
+
 const tasksToDo = response => {
   availableTasks((err, res) => {
     if (err) return console.log(err);
@@ -163,6 +186,16 @@ const tasksToDo = response => {
 
 const getUserTasks = response => {
   userTasks((err, res) => {
+    if (err) return console.log(err);
+    let dynmicData = JSON.stringify(res);
+    console.log(dynmicData);
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(dynmicData);
+  });
+};
+
+const getUserTasksDone = response => {
+  done((err, res) => {
     if (err) return console.log(err);
     let dynmicData = JSON.stringify(res);
     console.log(dynmicData);
@@ -203,5 +236,7 @@ module.exports = {
   addTask,
   takeTask,
   tasksToDo,
-  getUserTasks
+  getUserTasks,
+  markCompleted,
+  getUserTasksDone
 };
