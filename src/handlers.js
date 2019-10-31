@@ -53,7 +53,9 @@ const userLogin = (request, response) => {
   });
   request.on("end", () => {
     const username = queryString.parse(data).userName;
+    console.log(username);
     const password = queryString.parse(data).password;
+    console.log(password);
     userCreds(username, password, (err, res) => {
       if (err) {
         response.writeHead(500, "Content-Type: text/html");
