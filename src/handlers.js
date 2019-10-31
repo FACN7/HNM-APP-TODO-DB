@@ -12,12 +12,11 @@ const insertTask = require("./queries/insert_new_task");
 const takenTask = require("./queries/update_task_to_taken");
 const availableTasks = require("./queries/available_tasks");
 const userTasks = require("./queries/task_list_byUser");
-<<<<<<< HEAD
+
 const addUser = require("./queries/add_user");
-=======
+
 const done = require("./queries/task_list_byUser_done");
 const complete = require("./queries/update_task_to_done");
->>>>>>> 1909f56ab696aacf0916abcd11207993d9fe43e1
 
 const SECRET = "kjshfcwahbfcjawbsf";
 
@@ -55,7 +54,7 @@ const displayTasks = response => {
 
 const userLogin = (request, response) => {
   let data = "";
-  request.on("data", function (chunk) {
+  request.on("data", function(chunk) {
     data += chunk;
   });
   request.on("end", () => {
@@ -119,7 +118,7 @@ const checkUser = (request, response) => {
 
 const signUp = (request, response) => {
   let data = "";
-  request.on("data", function (chunk) {
+  request.on("data", function(chunk) {
     data += chunk;
   });
   request.on("end", () => {
@@ -138,46 +137,41 @@ const signUp = (request, response) => {
       });
     };
 
-    hashPassword(
-      password, function (err, res) {
-        if (err) {
-          console.log(err);
-          return err;
-        } else {
-          console.log("result: " + res);
-          addUser(user_name, res, (err, resp) => {
-            if (err) {
-              response.writeHead(500, "Content-Type: text/html");
-              response.end("<h1>Sorry, there was a problem finding this user</h1>");
-              console.log(err);
-            } else {
+    hashPassword(password, function(err, res) {
+      if (err) {
+        console.log(err);
+        return err;
+      } else {
+        console.log("result: " + res);
+        addUser(user_name, res, (err, resp) => {
+          if (err) {
+            response.writeHead(500, "Content-Type: text/html");
+            response.end(
+              "<h1>Sorry, there was a problem finding this user</h1>"
+            );
+            console.log(err);
+          } else {
+            response.writeHead(302, { Location: "/login" });
+            response.end();
+          }
+        });
+      }
+    });
+  });
+};
 
-              response.writeHead(302, { Location: "/login" });
-              response.end();
-
-
-            }
-          })
-        }
-      })
-
-
-
-  })
-}
-
-const signUpPage = (response) => {
+const signUpPage = response => {
   const filepath = path.join(__dirname, "..", "public", "sign-up-page.html");
   readFile(filepath, (err, file) => {
     if (err) return serverError(err, res);
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end(file);
   });
-}
+};
 
 const addTask = (request, response) => {
   let data = "";
-  request.on("data", function (chunk) {
+  request.on("data", function(chunk) {
     data += chunk;
   });
   request.on("end", () => {
@@ -198,7 +192,7 @@ const addTask = (request, response) => {
 
 const takeTask = (request, response) => {
   let data = "";
-  request.on("data", function (chunk) {
+  request.on("data", function(chunk) {
     data += chunk;
   });
   request.on("end", () => {
@@ -219,7 +213,7 @@ const takeTask = (request, response) => {
 
 const markCompleted = (request, response) => {
   let data = "";
-  request.on("data", function (chunk) {
+  request.on("data", function(chunk) {
     data += chunk;
   });
   request.on("end", () => {
