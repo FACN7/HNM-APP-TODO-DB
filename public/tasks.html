@@ -4,97 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./tasks-style.css" />
+    <link rel="stylesheet" href="./public/tasks-style.css" />
     <title>Document</title>
   </head>
   <body>
+    <div class="navbar">
+      <div class="helloUserName">
+        <span style="color: aliceblue ; font-size: 3rem;">
+          <span class="userNameToSayHello" id="hello"> </span>
+        </span>
+      </div>
 
-      <div class="navbar">
-          
-          <div class="helloUserName" >
-                  <span style="color: aliceblue ; font-size: 3rem;"> Hello  <span class="userNameToSayHello"> Ntalya</span> </span>
-         </div>
+      <div class="dateDiv">
+        <span id="date" style="color: aliceblue;"> </span>
+      </div>
 
-         <div class="dateDiv">
-             <span id="date" style="color: aliceblue;"> </span>
-         </div>
+      <div class="signoutDiv">
+        <form action="/log-out" method="post">
+          <button class="signout">Log Out</button>
+        </form>
+      </div>
+    </div>
 
-         <div class="signoutDiv">
-              <form action="">    <button class="signout"> sign out </button>  </form>
-         </div>
-           
-         
-  </div>
-  
+    <br />
+    <br />
+    <br />
 
-<br>
-<br>
-<br>
-  
-
-    <div id="hello"></div>
+    <!-- <div id="hello"></div> -->
     <div class="tasksToDoContainer">
       <h1>* Taks to do *</h1>
       <div id="add-task-container"></div>
-      <ul id="tasksToDo">
-
-
-          <li>task 2  <button> >></button></li>
-          <li>task 3  <button> >></button></li>
-          <li>task 4  <button> >></button></li>
-          <li>task 5  <button> >></button></li>
-          <li>task 6  <button> >></button></li>
-          <li>task 7  <button> >></button></li>
-          <li>task 8  <button> >></button></li>
-          <li>task 9  <button> >></button></li>
-          <li>task 10 <button> >></button></li>
-          <li>task 11 <button> >></button></li>
-          <li>task 12 <button> >></button></li>
-          <li>task 13 <button> >></button></li>
-
-      </ul>
+      <ul id="tasksToDo"></ul>
     </div>
 
-
-
     <div class="userTasksContainer">
-        <h1>*Your Tasks*</h1>
+      <h1>*Your Tasks*</h1>
 
-    <ul class="userTasks" id="userTasksNotDone">
-        <li>task 3   <button>  ✘ </button> <button>  ✔ </button></li>
-        <li>task 4   <button>  ✘ </button> <button>  ✔ </button></li>
-        <li>task 5   <button>  ✘ </button> <button>  ✔ </button></li>
-        <li>task 6   <button>  ✘ </button> <button>  ✔ </button></li>
-
-
-    </ul>
-  </div>
+      <ul class="userTasks" id="userTasksNotDone"></ul>
+    </div>
     <!-- </ul> -->
 
     <div class="fnishedTasksContainer">
-        <h1 class="fnishedTasksTitle">*Fnished Tasks*</h1>
+      <h1 class="fnishedTasksTitle">*Finished Tasks*</h1>
 
-<ul class="fnishedTasks">
-<li>task 1   <button>  ✘ </button> <button>  ✔ </button></li>
-<li>task 2   <button>  ✘ </button> <button>  ✔ </button></li>
-<li>task 3   <button>  ✘ </button> <button>  ✔ </button></li>
-<li>task 4   <button>  ✘ </button> <button>  ✔ </button></li>
-<li>task 5   <button>  ✘ </button> <button>  ✔ </button></li>
-<li>task 6   <button>  ✘ </button> <button>  ✔ </button></li>
-<li>task 7   <button>  ✘ </button> <button>  ✔ </button></li>
+      <ul class="fnishedTasks" id="fnishedTasks"></ul>
+    </div>
 
-</ul>
-
-</div>
-    
     <script>
-        n =  new Date();
-        y = n.getFullYear();
-        m = n.getMonth() + 1;
-        d = n.getDate();
-        document.getElementById("date").innerHTML = m + "-" + d + "-" + y;
+      n = new Date();
+      y = n.getFullYear();
+      m = n.getMonth() + 1;
+      d = n.getDate();
+      document.getElementById("date").innerHTML = m + "-" + d + "-" + y;
     </script>
     <script type="text/javascript" src="public/index.js"></script>
-
   </body>
 </html>
