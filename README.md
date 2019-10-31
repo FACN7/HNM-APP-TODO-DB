@@ -3,7 +3,7 @@ Small app with database - node js
 
 ## Info for the reviewers
 
-[Link to Heroku](https://dashboard.heroku.com)
+[Link to Heroku](https://hnm-facn7-todo.herokuapp.com/)
 Smart people like you do not need any installation instructions :D Dont' forget npm i though
 
 It is a team task management app.
