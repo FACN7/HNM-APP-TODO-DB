@@ -11,6 +11,7 @@ fetch("/check-user")
     var hellodiv = document.getElementById("hello");
     var hellomsg = document.createElement("div");
     hellomsg.innerHTML = `Hello, ${username}!`;
+    hellomsg.className = "hello-user";
     hellodiv.appendChild(hellomsg);
     hellodiv.appendChild(logoutForm);
   });
@@ -68,7 +69,7 @@ fetch("/tasks-for-all")
       description.value = `${todo.content}`;
       description.style = "display:none";
       var takeButton = document.createElement("button");
-      takeButton.innerHTML = ">>";
+      takeButton.innerHTML = "Take";
       takeButton.type = "submit";
       takeButton.name = "take-todo";
       rowForm.appendChild(author);
@@ -92,7 +93,7 @@ fetch("/user-tasks")
       var rowForm = document.createElement("form");
       rowForm.className = "row-form";
       rowForm.method = "post";
-      rowForm.action = "/take-task";
+      rowForm.action = "/complete-task";
       rowForm.innerText = todo.content;
       rowForm.className = "task-to-do";
       var inputID = document.createElement("input");
@@ -106,12 +107,30 @@ fetch("/user-tasks")
       description.value = `${todo.content}`;
       description.style = "display:none";
       var takeButton = document.createElement("button");
-      takeButton.innerHTML = ">>";
+      takeButton.innerHTML = "Done";
       takeButton.type = "submit";
-      takeButton.name = "take-todo";
+      takeButton.name = "do-todo";
       rowForm.appendChild(takeButton);
       rowForm.appendChild(inputID);
       rowForm.appendChild(description);
+      li.appendChild(rowForm);
+      todos.appendChild(li);
+    });
+  });
+
+fetch("/tasks-done")
+  .then(res => res.json())
+  .then(info => {
+    var todos = document.getElementById("fnishedTasks");
+    var usertasks = info.filter(x => (x.user_id = userID));
+    usertasks.forEach(function(todo) {
+      var li = document.createElement("li");
+      var rowForm = document.createElement("form");
+      rowForm.className = "row-form";
+      rowForm.method = "post";
+      rowForm.action = "/complete-task";
+      rowForm.innerText = todo.content;
+      rowForm.className = "task-to-do";
       li.appendChild(rowForm);
       todos.appendChild(li);
     });

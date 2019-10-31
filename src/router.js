@@ -9,7 +9,9 @@ const {
   addTask,
   takeTask,
   tasksToDo,
-  getUserTasks
+  getUserTasks,
+  markCompleted,
+  getUserTasksDone
 } = require("./handlers");
 
 const router = (request, response) => {
@@ -28,10 +30,14 @@ const router = (request, response) => {
     addTask(request, response);
   } else if (url === "/take-task") {
     takeTask(request, response);
+  } else if (url === "/complete-task") {
+    markCompleted(request, response);
   } else if (url === "/tasks-for-all") {
     tasksToDo(response);
   } else if (url === "/user-tasks") {
     getUserTasks(response);
+  } else if (url === "/tasks-done") {
+    getUserTasksDone(response);
   } else if (url.includes("public")) {
     publicHandler(url, response);
   } else {

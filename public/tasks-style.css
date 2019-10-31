@@ -4,9 +4,10 @@ button {
   width: 8rem;
 
   color: black;
-  background: salmon;
+  background: #b2dbbf;
   cursor: pointer;
-  border-radius: 5%;
+  border-radius: 10%;
+  box-shadow: 0px 0px 10px 1px grey;
   border: none;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 15px 32px;
@@ -17,11 +18,12 @@ button {
   margin: 4px 2px;
   cursor: pointer;
   font-weight: bold;
-  border: 1px whitesmoke solid;
-  opacity: 0.9;
+  border: none;
+  /* opacity: 0.9; */
   /* float: right; */
 
   margin-top: 1rem;
+  margin-left: 20px;
   /* margin:3rem; */
 }
 body {
@@ -29,7 +31,7 @@ body {
   background: black;
 
   /* ----------------new -------------- */
-  background-color: gray;
+  background-color: #f3ffbd;
   /* background-image: url(http://www.transparenttextures.com/patterns/wood-pattern.png); */
 }
 
@@ -37,27 +39,28 @@ body {
 #tasksToDo {
   overflow: auto;
   height: 900px;
-  background: gray;
+  background: #f3ffbd;
 }
 
 #tasksToDo li {
   color: black;
-  /* background: red; */
+  /* background: #FF1654; */
   margin-bottom: 30px;
-  font-size: 3rem;
+  font-size: 2rem;
   width: 939px;
   overflow: auto;
 }
 
 .tasksToDoContainer {
   float: left;
-  background: gray;
+  background: #f3ffbd;
   /* position: absolute; */
   border-radius: 1%;
 }
 .tasksToDoContainer h1 {
-  background: red;
+  background: #ff1654;
   text-align: center;
+  color: white;
 }
 
 /* <----------------------userTasks section-------------------------> */
@@ -65,32 +68,33 @@ body {
 .userTasks {
   height: 500px;
   overflow: auto;
-  background: gray;
+  background: #f3ffbd;
 }
 .userTasks li {
   color: black;
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 30px;
   width: 800px;
 }
 
 .userTasksContainer {
   float: right;
-  background: gray;
+  background: #f3ffbd;
   /* position: absolute; */
   /* right: 0; */
   border-radius: 1%;
 }
 
 .userTasksContainer h1 {
-  background: orange;
+  background: #247ba0;
   text-align: center;
+  color: white;
 }
 
 /* <----------------------fnishedTasks section-------------------------> */
 
 .fnishedTasks li {
-  font-size: 3rem;
+  font-size: 2rem;
   width: 800px;
   /* background: greenyellow; */
   margin-bottom: 30px;
@@ -101,12 +105,12 @@ body {
   } */
 
 .fnishedTasksContainer h1 {
-  background: greenyellow;
+  background: #70c1b3;
   text-align: center;
 }
 
 .fnishedTasksContainer {
-  background: gray;
+  background: #f3ffbd;
   /* padding-top: 3rem; */
   float: right;
   border-radius: 1%;
@@ -115,7 +119,7 @@ body {
 .fnishedTasks {
   height: 500px;
   overflow: auto;
-  background: gray;
+  background: #f3ffbd;
 }
 
 /* <----------------------navBar section-------------------------> */
@@ -161,7 +165,7 @@ body {
   float: right;
   /* float: left; */
   display: block;
-  color: #f2f2f2;
+  color: #f2fnav2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -205,7 +209,10 @@ body {
 }
 
 #date {
-  font-size: 4rem;
+  font-size: 2rem;
+  position: relative;
+  top: 20px;
+  /* padding-top: 20px; */
 }
 
 /* ----------------------------------------------- styling scrollbar ----------------------------------------------------- */
@@ -247,4 +254,9 @@ body {
 .new-task-form button {
   margin: 0px;
   margin-left: 10px;
+}
+
+.hello-user {
+  font-size: 32px;
+  margin: 20px;
 }
