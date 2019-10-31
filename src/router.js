@@ -10,6 +10,8 @@ const {
   takeTask,
   tasksToDo,
   getUserTasks,
+  signUp,
+  signUpPage,
   markCompleted,
   getUserTasksDone
 } = require("./handlers");
@@ -40,7 +42,12 @@ const router = (request, response) => {
     getUserTasksDone(response);
   } else if (url.includes("public")) {
     publicHandler(url, response);
-  } else {
+  } else if (url === "/sign-up") {
+    signUp(request, response);
+  } else if (url === "/sign-up-page") {
+    signUpPage(response);
+  }
+  else {
     errorHandler(response);
   }
 };
