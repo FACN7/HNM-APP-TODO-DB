@@ -1,7 +1,7 @@
 // We store the ID of logged in user to use it after
 let userID;
 
-// Authentication fetch, say hello to the user and adds log out button.
+// Authentication fetch, say hello to the user
 
 fetch("/check-user")
   .then(res => res.json())
@@ -12,16 +12,6 @@ fetch("/check-user")
     var hellomsg = document.createElement("div");
     hellomsg.innerHTML = `Hello, ${username}!`;
     hellodiv.appendChild(hellomsg);
-    var logoutForm = document.createElement("form");
-    logoutForm.className = "logout-form";
-    logoutForm.method = "post";
-    logoutForm.action = "/log-out";
-    var inputID = document.createElement("input");
-    var logoutButton = document.createElement("button");
-    logoutButton.type = "submit";
-    logoutButton.name = "submit-return";
-    logoutButton.innerText = "Log Out";
-    logoutForm.appendChild(logoutButton);
     hellodiv.appendChild(logoutForm);
   });
 
@@ -41,6 +31,7 @@ fetch("/tasks-for-all")
     newTaskField.type = "text";
     newTaskField.name = "task";
     newTaskField.placeholder = "Add your task here";
+    newTaskField.className = "new-task";
     var uID = document.createElement("input");
     uID.type = "text";
     uID.name = "author_id";
